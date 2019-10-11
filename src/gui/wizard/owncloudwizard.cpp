@@ -78,11 +78,12 @@ OwncloudWizard::OwncloudWizard(QWidget *parent)
     setWizardStyle(QWizard::ModernStyle);
     setPixmap(QWizard::BannerPixmap, theme->wizardHeaderBanner());
     setPixmap(QWizard::LogoPixmap, theme->wizardHeaderLogo());
-    setOption(QWizard::NoBackButtonOnStartPage);
-    setOption(QWizard::NoBackButtonOnLastPage);
-    setOption(QWizard::NoCancelButton);
+    setOption(QWizard::NoBackButtonOnStartPage,tr("&voltar"));
+    setOption(QWizard::NoBackButtonOnLastPage,tr("&voltar"));
+    setOption(QWizard::NoCancelButton,tr("&cancelar"));
     setTitleFormat(Qt::RichText);
     setSubTitleFormat(Qt::RichText);
+
 }
 
 void OwncloudWizard::setAccount(AccountPtr account)
@@ -194,7 +195,7 @@ void OwncloudWizard::slotCurrentPageChanged(int id)
     if (id == WizardCommon::Page_AdvancedSetup && _credentialsPage == _browserCredsPage) {
         // For OAuth, disable the back button in the Page_AdvancedSetup because we don't want
         // to re-open the browser.
-        button(QWizard::BackButton)->setEnabled(false);
+        button(QWizard::BackButton,tr("&voltar"))->setEnabled(false);
     }
 }
 
