@@ -502,8 +502,8 @@ void AccountSettings::slotRemoveCurrentFolder()
 
         QMessageBox messageBox(QMessageBox::Question,
             tr("Confirme a Remoção de Sincronização de Pasta"),
-            tr("&lt;p&gt;Você realmente deseja para a sincronização desta pasta &lt;i&gt;%1&lt;/i&gt;?&lt;/p&gt;"
-               "&lt;p&gt;&lt;b&gt;Nota:&lt;/b&gt; Isto &lt;b&gt;não&lt;/b&gt; vai deletar qualquer arquivo.&lt;/p&gt;")
+            tr("<p>Você realmente deseja parar a sincronização desta pasta <i>%1</i></p>"
+               "<p><b>Nota: Isto vai deletar qualquer arquivo.</b></p>")
                 .arg(shortGuiLocalPath),
             QMessageBox::NoButton,
             this);
@@ -843,7 +843,7 @@ void AccountSettings::slotAccountStateChanged()
             if (user.isEmpty()) {
                 user = cred->user();
             }
-            serverWithUser = tr("%1 como &lt;i&gt;%2&lt;/i&gt;").arg(server, Utility::escape(user));
+            serverWithUser = tr("%1 como <i>%2</i>").arg(server, Utility::escape(user));
         }
 
         switch (state) {
@@ -1066,9 +1066,7 @@ void AccountSettings::slotDeleteAccount()
     {
         QMessageBox messageBox(QMessageBox::Question,
             tr("Confirmar a Remoção da Conta"),
-            tr("&lt;p&gt;Você realmente deseja remover a conexão desta conta&lt;i&gt;%1&lt;/i&gt;?&lt;/p&gt;"
-               "&lt;p&gt;&lt;b&gt;Nota:&lt;/b&gt; Isto &lt;b&gt;não&lt;/b&gt; irá deletar nenhum arquivo.&lt;/p&gt;")
-                .arg(_accountState->account()->displayName()),
+            tr("<p>Você realmente deseja remover a conexão desta conta? </p>"),
             QMessageBox::NoButton,
             this);
         QPushButton *yesButton =

@@ -77,7 +77,7 @@ void NotificationWidget::setActivity(const Activity &activity)
         _buttons.append(b);
     } else {
         foreach (auto link, activity._links) {
-            QPushButton *b = _ui._buttonBox->addButton(link._label, QDialogButtonBox::AcceptRole);
+            QPushButton *b = _ui._buttonBox->addButton(link._label,QDialogButtonBox::AcceptRole);
             b->setDefault(link._isPrimary);
             connect(b, &QAbstractButton::clicked, this, &NotificationWidget::slotButtonClicked);
             _buttons.append(b);

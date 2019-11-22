@@ -401,7 +401,7 @@ void OwncloudSetupWizard::slotAuthError()
     } else if (reply->error() != QNetworkReply::NoError) {
         if (!_ocWizard->account()->credentials()->stillValid(reply)) {
             errorMsg = tr("Acesso proibido pelo servidor. Para verificar se você tem acesso adequado,  "
-                          "&lt;a href=&quot;%1&quot;&gt;clique aqui&lt;/a&gt; para acessar o serviço com o seu navegador.")
+                          "<a href=%1>clique aqui</a> para acessar o serviço com o seu navegador.")
                            .arg(Utility::escape(_ocWizard->account()->url().toString()));
         } else {
             errorMsg = job->errorStringParsingBody();
@@ -510,7 +510,7 @@ void OwncloudSetupWizard::slotRemoteFolderExists(QNetworkReply *reply)
 
 void OwncloudSetupWizard::createRemoteFolder()
 {
-    _ocWizard->appendToConfigurationLog(tr("criar pasta no Result Cloud Storage: %1").arg(_remoteFolder));
+    _ocWizard->appendToConfigurationLog(tr("criar pasta no Result Cloud: %1").arg(_remoteFolder));
 
     MkColJob *job = new MkColJob(_ocWizard->account(), _remoteFolder, this);
     connect(job, SIGNAL(finished(QNetworkReply::NetworkError)), SLOT(slotCreateRemoteFolderFinished(QNetworkReply::NetworkError)));

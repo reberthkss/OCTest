@@ -160,6 +160,7 @@ void OwncloudSetupPage::initializePage()
 
     QAbstractButton *nextButton = wizard()->button(QWizard::NextButton);
     QPushButton *pushButton = qobject_cast<QPushButton *>(nextButton);
+	
     if (pushButton)
         pushButton->setDefault(true);
 

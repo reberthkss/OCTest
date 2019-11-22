@@ -74,15 +74,18 @@ OwncloudWizard::OwncloudWizard(QWidget *parent)
 
 
     Theme *theme = Theme::instance();
-    setWindowTitle(tr("%Assistente de Conexões do %1").arg(theme->appNameGUI()));
+    setWindowTitle(tr("Assistente de Conexões do %1").arg(theme->appNameGUI()));
     setWizardStyle(QWizard::ModernStyle);
     setPixmap(QWizard::BannerPixmap, theme->wizardHeaderBanner());
     setPixmap(QWizard::LogoPixmap, theme->wizardHeaderLogo());
-    setOption(QWizard::NoBackButtonOnStartPage,tr("&voltar"));
-    setOption(QWizard::NoBackButtonOnLastPage,tr("&voltar"));
-    setOption(QWizard::NoCancelButton,tr("&cancelar"));
+    setOption(QWizard::NoBackButtonOnStartPage);
+    setOption(QWizard::NoBackButtonOnLastPage);
+    setOption(QWizard::NoCancelButton);
     setTitleFormat(Qt::RichText);
     setSubTitleFormat(Qt::RichText);
+	setButtonText(QWizard::BackButton,tr("< Voltar "));
+	setButtonText(QWizard::NextButton,tr("Próximo > "));
+	
 
 }
 
@@ -195,7 +198,7 @@ void OwncloudWizard::slotCurrentPageChanged(int id)
     if (id == WizardCommon::Page_AdvancedSetup && _credentialsPage == _browserCredsPage) {
         // For OAuth, disable the back button in the Page_AdvancedSetup because we don't want
         // to re-open the browser.
-        button(QWizard::BackButton,tr("&voltar"))->setEnabled(false);
+        button(QWizard::BackButton)->setEnabled(false);
     }
 }
 
