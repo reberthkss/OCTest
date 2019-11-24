@@ -320,7 +320,7 @@ QString Theme::gitSHA1() const
         "https://github.com/owncloud/client/commit/"));
     const QString gitSha1(QLatin1String(GIT_SHA1));
     devString = QCoreApplication::translate("ownCloudTheme::about()",
-        "&lt;p&gt;&lt;small&gt;Construído a partir de revisão Git &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt;"
+        "&lt;p&gt;&lt;small&gt;Construído a partir de revisão Git &lt;a href="%1"&gt;%2&lt;/a&gt;"
         " em %3, %4 usando Qt %5, %6&lt;/small&gt;&lt;/p&gt;")
                     .arg(githubPrefix + gitSha1)
                     .arg(gitSha1.left(6))
