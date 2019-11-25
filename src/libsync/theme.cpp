@@ -321,7 +321,7 @@ QString Theme::gitSHA1() const
     const QString gitSha1(QLatin1String(GIT_SHA1));
     devString = QCoreApplication::translate("ownCloudTheme::about()",
         "<p><small>Construído a partir de revisão Git <a href='%1'>%2</a>"
-        " em %3, %4 usando Qt %5, %6</small></p>")
+        " em %3, %4 usando Qt %5, %6</small></p>");
                     
 #endif
     return devString;
