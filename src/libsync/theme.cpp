@@ -61,34 +61,34 @@ QString Theme::statusHeaderText(SyncResult::Status status) const
 
     switch (status) {
     case SyncResult::Undefined:
-        resultStr = QCoreApplication::translate("theme", "Status undefined");
+        resultStr = QCoreApplication::translate("theme", "Status indefinido");
         break;
     case SyncResult::NotYetStarted:
-        resultStr = QCoreApplication::translate("theme", "Waiting to start sync");
+        resultStr = QCoreApplication::translate("theme", "Aguardando iniciar a sincronização");
         break;
     case SyncResult::SyncRunning:
-        resultStr = QCoreApplication::translate("theme", "Sync is running");
+        resultStr = QCoreApplication::translate("theme", "Sincronizando");
         break;
     case SyncResult::Success:
-        resultStr = QCoreApplication::translate("theme", "Sync Success");
+        resultStr = QCoreApplication::translate("theme", "Sincronizaldo com sucesso");
         break;
     case SyncResult::Problem:
-        resultStr = QCoreApplication::translate("theme", "Sync Success, some files were ignored.");
+        resultStr = QCoreApplication::translate("theme", "Sincronizado com sucesso, alguns arquivos ignorados.");
         break;
     case SyncResult::Error:
-        resultStr = QCoreApplication::translate("theme", "Sync Error");
+        resultStr = QCoreApplication::translate("theme", "Erro na sincronização");
         break;
     case SyncResult::SetupError:
-        resultStr = QCoreApplication::translate("theme", "Setup Error");
+        resultStr = QCoreApplication::translate("theme", "Erro na configuração");
         break;
     case SyncResult::SyncPrepare:
-        resultStr = QCoreApplication::translate("theme", "Preparing to sync");
+        resultStr = QCoreApplication::translate("theme", "Preparando para sincronizar");
         break;
     case SyncResult::SyncAbortRequested:
-        resultStr = QCoreApplication::translate("theme", "Aborting...");
+        resultStr = QCoreApplication::translate("theme", "cancelando...");
         break;
     case SyncResult::Paused:
-        resultStr = QCoreApplication::translate("theme", "Sync is paused");
+        resultStr = QCoreApplication::translate("theme", "Sincronização pausada");
         break;
     }
     return resultStr;
@@ -101,7 +101,7 @@ QString Theme::appNameGUI() const
 
 QString Theme::appName() const
 {
-    return APPLICATION_SHORTNAME;
+    return "Result Cloud";
 }
 
 QString Theme::version() const
@@ -169,9 +169,11 @@ QIcon Theme::themeIcon(const QString &name, bool sysTray, bool sysTrayMenuVisibl
     }
 
 #ifdef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     // This defines the icon as a template and enables automatic macOS color handling
     // See https://bugreports.qt.io/browse/QTBUG-42109
     cached.setIsMask(_mono && sysTray && !sysTrayMenuVisible);
+#endif
 #endif
 
     return cached;
@@ -318,8 +320,8 @@ QString Theme::gitSHA1() const
         "https://github.com/owncloud/client/commit/"));
     const QString gitSha1(QLatin1String(GIT_SHA1));
     devString = QCoreApplication::translate("ownCloudTheme::about()",
-        "<p><small>Built from Git revision <a href=\"%1\">%2</a>"
-        " on %3, %4 using Qt %5, %6</small></p>")
+        "&lt;p&gt;&lt;small&gt;Construído a partir de revisão Git &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt;"
+        " em %3, %4 usando Qt %5, %6&lt;/small&gt;&lt;/p&gt;")
                     .arg(githubPrefix + gitSha1)
                     .arg(gitSha1.left(6))
                     .arg(__DATE__)
@@ -335,24 +337,18 @@ QString Theme::about() const
     QString vendor = APPLICATION_VENDOR;
     // Ideally, the vendor should be "ownCloud GmbH", but it cannot be changed without
     // changing the location of the settings and other registery keys.
-    if (vendor == "ownCloud") vendor = QLatin1String("ownCloud GmbH");
+    if (vendor == "ownCloud") vendor = QLatin1String("Result Tecnologia Cloud Storage");
 
     QString devString;
-    devString = tr("<p>Version %2. For more information visit <a href=\"%3\">https://%4</a></p>"
-                       "<p>For known issues and help, please visit: <a href=\"https://central.owncloud.org/c/desktop-client\">https://central.owncloud.org</a></p>"
-                       "<p><small>By Klaas Freitag, Daniel Molkentin, Olivier Goffart, Markus Götz, "
-                       " Jan-Christoph Borchardt, and others.</small></p>")
-                    .arg(Utility::escape(MIRALL_VERSION_STRING),
-                        Utility::escape("https://" MIRALL_STRINGIFY(APPLICATION_DOMAIN)),
-                        Utility::escape(MIRALL_STRINGIFY(APPLICATION_DOMAIN)));
-    devString += tr("<p>Copyright ownCloud GmbH</p>");
+    devString = tr("<h3>by: Result Tecnologa</h3>");
+    devString += tr("<p>Copyright Result Tecnologia </p>");
     devString += tr("<p>Distributed by %1 and licensed under the GNU General Public License (GPL) Version 2.0.<br/>"
                     "%2 and the %2 logo are registered trademarks of %1 in the "
                     "United States, other countries, or both.</p>")
                .arg(Utility::escape(vendor), Utility::escape(APPLICATION_NAME));
 
     devString += gitSHA1();
-    devString += QString("<p><small>Using virtual files plugin: %1</small></p>")
+    devString += QString("<p><small>Utilizando arquivos virtuais:  %1</small></p>")
         .arg(Vfs::modeToString(bestAvailableVfsMode()));
 
     return devString;
@@ -566,6 +562,11 @@ QString Theme::versionSwitchOutput() const
 bool Theme::showVirtualFilesOption() const
 {
     return ConfigFile().showExperimentalOptions();
+}
+
+bool Theme::noUnauthedRequests() const
+{
+    return false;
 }
 
 } // end namespace client
