@@ -320,8 +320,8 @@ QString Theme::gitSHA1() const
         "https://github.com/owncloud/client/commit/"));
     const QString gitSha1(QLatin1String(GIT_SHA1));
     devString = QCoreApplication::translate("ownCloudTheme::about()",
-        "&lt;p&gt;&lt;small&gt;Construído a partir de revisão Git &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt;"
-        " em %3, %4 usando Qt %5, %6&lt;/small&gt;&lt;/p&gt;")
+        "<p><small>Built from Git revision <a href=\"%1\">%2</a>"
+        " on %3, %4 using Qt %5, %6</small></p>")
                     .arg(githubPrefix + gitSha1)
                     .arg(gitSha1.left(6))
                     .arg(__DATE__)
@@ -340,15 +340,21 @@ QString Theme::about() const
     if (vendor == "ownCloud") vendor = QLatin1String("ownCloud GmbH");
 
     QString devString;
-    devString = tr("<h3>by: Result Tecnologa</h3>");
-    devString += tr("<p>Copyright Result Tecnologia </p>");
+    devString = tr("<p>Version %2. For more information visit <a href=\"%3\">https://%4</a></p>"
+                       "<p>For known issues and help, please visit: <a href=\"https://central.owncloud.org/c/desktop-client\">https://central.owncloud.org</a></p>"
+                       "<p><small>By Klaas Freitag, Daniel Molkentin, Olivier Goffart, Markus Götz, "
+                       " Jan-Christoph Borchardt, and others.</small></p>")
+                    .arg(Utility::escape(MIRALL_VERSION_STRING),
+                        Utility::escape("https://" MIRALL_STRINGIFY(APPLICATION_DOMAIN)),
+                        Utility::escape(MIRALL_STRINGIFY(APPLICATION_DOMAIN)));
+    devString += tr("<p>Copyright ownCloud GmbH</p>");
     devString += tr("<p>Distributed by %1 and licensed under the GNU General Public License (GPL) Version 2.0.<br/>"
                     "%2 and the %2 logo are registered trademarks of %1 in the "
                     "United States, other countries, or both.</p>")
                .arg(Utility::escape(vendor), Utility::escape(APPLICATION_NAME));
 
-    
-    devString += QString("<p><small>Utilizando arquivos virtuais:  %1</small></p>")
+    devString += gitSHA1();
+    devString += QString("<p><small>Using virtual files plugin: %1</small></p>")
         .arg(Vfs::modeToString(bestAvailableVfsMode()));
 
     return devString;
